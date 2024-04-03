@@ -1,0 +1,10 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "cms website api local",
+      "database": "${workspaceFolder:cms-website-api}/.tmp/data.db"
+    }
+  ]
+}
