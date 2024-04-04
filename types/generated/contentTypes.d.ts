@@ -362,6 +362,38 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiContactMessageContactMessage extends Schema.CollectionType {
+  collectionName: 'contact_messages';
+  info: {
+    singularName: 'contact-message';
+    pluralName: 'contact-messages';
+    displayName: 'Contact Message';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    Email: Attribute.String;
+    Message: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-message.contact-message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact-message.contact-message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFlyingMachineFlyingMachine extends Schema.CollectionType {
   collectionName: 'flying_machines';
   info: {
@@ -942,6 +974,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::contact-message.contact-message': ApiContactMessageContactMessage;
       'api::flying-machine.flying-machine': ApiFlyingMachineFlyingMachine;
       'api::hero-text.hero-text': ApiHeroTextHeroText;
       'api::weapon.weapon': ApiWeaponWeapon;
