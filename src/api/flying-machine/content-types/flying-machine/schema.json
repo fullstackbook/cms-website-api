@@ -44,14 +44,21 @@
       "min": 1
     },
     "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "weapons": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::weapon.weapon",
+      "inversedBy": "flying_machines"
     }
   }
 }

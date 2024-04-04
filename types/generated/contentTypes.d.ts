@@ -417,6 +417,11 @@ export interface ApiFlyingMachineFlyingMachine extends Schema.CollectionType {
         number
       >;
     Image: Attribute.Media;
+    weapons: Attribute.Relation<
+      'api::flying-machine.flying-machine',
+      'manyToMany',
+      'api::weapon.weapon'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -459,6 +464,41 @@ export interface ApiHeroTextHeroText extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::hero-text.hero-text',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWeaponWeapon extends Schema.CollectionType {
+  collectionName: 'weapons';
+  info: {
+    singularName: 'weapon';
+    pluralName: 'weapons';
+    displayName: 'Weapon';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    flying_machines: Attribute.Relation<
+      'api::weapon.weapon',
+      'manyToMany',
+      'api::flying-machine.flying-machine'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::weapon.weapon',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::weapon.weapon',
       'oneToOne',
       'admin::user'
     > &
@@ -904,6 +944,7 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::flying-machine.flying-machine': ApiFlyingMachineFlyingMachine;
       'api::hero-text.hero-text': ApiHeroTextHeroText;
+      'api::weapon.weapon': ApiWeaponWeapon;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
